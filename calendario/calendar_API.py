@@ -1,9 +1,9 @@
-import os
+from decouple import config
 from google.oauth2 import service_account
 import googleapiclient.discovery
 import datetime
 
-CAL_ID= os.environ['CAL_ID']
+CAL_ID = config('CAL_ID')
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 SERVICE_ACCOUNT_FILE = 'calendario/google-credentials.json'
 
