@@ -1,21 +1,5 @@
 {
   "files": {
-    "README.md": [
-      {
-        "id": "abbdcc98-be8b-45c9-9551-e8404f4e735c",
-        "line": 8,
-        "version": 1,
-        "index": 216
-      }
-    ],
-    "home/templates/login.html": [
-      {
-        "id": "b1264081-1bb9-4121-b1ef-05ff12ee4940",
-        "line": 34,
-        "version": 1,
-        "index": 1584
-      }
-    ],
     "stock/templates/editar_ingrediente (404).html": [
       {
         "id": "a0960685-5953-44b6-beed-43b5cfadece6",
