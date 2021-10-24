@@ -1,0 +1,109 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href={% static "calendario/fonts/icomoon/style.css" %}>
+  
+    <link href={%static 'calendario/fullcalendar/packages/core/main.css'%} rel='stylesheet' />
+    <link href={%static 'calendario/fullcalendar/packages/daygrid/main.css'%} rel='stylesheet' />
+    
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={%static "calendario/css/bootstrap.min.css"%}>
+    
+    <!-- Style -->
+    <link rel="stylesheet" href={% static "calendario/css/style.css"%}>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>		
+    <title>Calendario</title>
+  </head>
+  <body>
+		<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand " href="#">MANDARINA</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+												{% if user.is_authenticated %}
+												<li class="nav-item dropdown">
+													<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="true">{{user.username}}</a>
+													<div class="dropdown-menu">
+														<a class="dropdown-item start" href="/logout">cerrar sesión</a>
+													</div>
+												</li>		
+												{% else %}
+												<li class="nav-item">
+													<a class="nav-link" href="/">Login</a>
+												</li>
+												{% endif %}
+												<div>
+													<button id="boton_calendario" onclick="window.location.href='/calendario/demo'">Actualizar Google Calendar</button>
+												</div>
+                    </ul>
+                </div>
+								
+            </div>
+        </nav>
+
+ 
+
+  <div id='calendar-container'>
+    <div id='calendar'></div>
+  </div>
+    
+    
+
+    <script src={%static "calendario/js/jquery-3.3.1.min.js"%}></script>
+    <script src={%static "calendario/js/popper.min.js"%}></script>
+    <script src={%static "calendario/js/bootstrap.min.js"%}></script>
+
+    <script src={%static 'calendario/fullcalendar/packages/core/main.js'%}></script>
+    <script src={%static 'calendario/fullcalendar/packages/interaction/main.js'%}></script>
+    <script src={%static 'calendario/fullcalendar/packages/daygrid/main.js'%}></script>
+    <script src={%static 'calendario/fullcalendar/packages/timegrid/main.js'%}></script>
+    <script src={%static 'calendario/fullcalendar/packages/list/main.js'%}></script>
+    <script src={%static 'calendario/fullcalendar/packages/google-calendar/main.js'%}></script>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list','googleCalendarPlugin'],
+      height: 'parent',
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      defaultView: 'dayGridMonth',
+      defaultDate: '2021-10-04',
+      googleCalendarApiKey: 'AIzaSyAY5Gb2HneFvbvHXpT0jENe9WlkntJfjYk',
+      events: {
+        googleCalendarId: 's7o4lnf2j3p45e10ernfnevo9g@group.calendar.google.com'
+      },
+
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+    });
+     
+    calendar.render();
+  });
+
+    </script>
+
+    <script src={%static "calendario/js/main.js"%}></script>
+  </body>
+</html>
+

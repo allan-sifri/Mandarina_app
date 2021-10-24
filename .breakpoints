@@ -1,0 +1,44 @@
+{
+  "files": {
+    "README.md": [
+      {
+        "id": "abbdcc98-be8b-45c9-9551-e8404f4e735c",
+        "line": 8,
+        "version": 1,
+        "index": 216
+      }
+    ],
+    "home/templates/login.html": [
+      {
+        "id": "b1264081-1bb9-4121-b1ef-05ff12ee4940",
+        "line": 34,
+        "version": 1,
+        "index": 1584
+      }
+    ],
+    "stock/templates/editar_ingrediente (404).html": [
+      {
+        "id": "a0960685-5953-44b6-beed-43b5cfadece6",
+        "line": 6,
+        "version": 1,
+        "index": 239
+      }
+    ],
+    "stock/urls.py": [
+      {
+        "id": "a5fabaa7-5c55-49a2-8a35-4fd384209b90",
+        "line": 12,
+        "version": 1,
+        "index": 484
+      }
+    ],
+    "stock/views.py": [
+      {
+        "id": "ee68abff-dd84-4bef-b37c-4a16ff8d1c17",
+        "line": 32,
+        "version": 1,
+        "index": 896
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{%load static%}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mandarina</title>
+        <!-- Favicon-->
+         <link rel="icon" type="image/x-icon" href={% static "home/assets/mandarina.ico"%} />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+				<!-- fontawesome Icons-->
+				<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>	
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href={%static "homepage/css/styles1.css"%} rel="stylesheet" />
+				<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+				<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>						
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand " href="#page-top">MANDARINA</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+												{% if user.is_authenticated %}									
+                        <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+
+												<li class="nav-item dropdown">
+													<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="true">{{user.username}}</a>
+													<div class="dropdown-menu">
+														<a class="dropdown-item start" href="/logout">cerrar sesión</a>
+													</div>
+												</li>		
+												
+												{% else %}
+												<li class="nav-item">
+													<a class="nav-link" href="/">Login</a>
+												</li>
+												{% endif %}
+
+                    </ul>
+                </div>
+								
+            </div>
+        </nav>
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 h-100">						
+						<!--	<a href="http://www.freepik.com">Designed by Vectorium / Freepik</a>-->
+                <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+											<br><br><br>
+                        <h3 class="text-white font-weight-bold">PEDIDOS</h3>
+                        <hr class="divider" />
+                    </div>											
+										{% if pedidos %}																			
+										<div class="container px-4 px-lg-5">
+											<table class="table table-hover table-bordered table-sm table-light">
+												<thead class="thead table-dark">
+													<tr>
+														<th scope="col">N°</th>
+														<th scope="col">Nombre</th>
+														<th scope="col">Fecha</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for pedido in pedidos %}
+													<tr>
+														<td>{{pedido.id}}</td>
+														<td>{{pedido.nombre}}</td>	
+														<td>{{pedido.entrega}}</td>
+														<!-- links a paginas crud -->			
+														<td><a href="{% url 'elimiar_pedido' pedido.id %}">Eliminar</a></td>									
+													</tr>									
+													{% endfor %}
+												</tbody>
+											</table>						
+										</div>
+										{% endif %}
+								</div>
+            </div>
+        </header>					
+				<!-- Services-->			
+				<section class="page-section bg-primary id="services">					
+						<div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+								<p>
+									<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+										Agregar pedido
+									</button>
+								</p>
+								<div class="collapse" id="collapseExample">
+									<div class="modal-dialog" role="document">
+											<div class="modal-content rounded-5 shadow">
+												<div class="modal-header p-5 pb-4 border-bottom-0">
+													<!-- <h5 class="modal-title">Modal title</h5> -->
+													<h2 class="fw-bold mb-0">Nuevo Pedido</h2>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+
+												<div class="modal-body p-5 pt-0">
+														<form method="post" novalidate>
+															{% csrf_token %}
+															{{ pedido_form|crispy }}
+															<br></br>
+															<button type="submit" class="btn btn-success">Guardar</button>
+														</form>
+												</div>
+											</div>
+									</div>																							
+								</div>														
+						</div>
+				</section>		
+				<div class="social-icons">
+						<div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
+								<a class="btn btn-dark m-3" href="https://calendar.google.com" target="_blank"><i class="far fa-calendar-alt"></i></a>
+						</div>
+				</div>					
+        <!-- Footer-->
+        <footer class="bg-light py-5">
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Mandarina Baked</div></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src={%static "homepage/js/scripts.js"%}></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
